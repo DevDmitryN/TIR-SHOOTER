@@ -21,19 +21,16 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            _fireObject.Play();
+            
             RaycastHit hit;
 
             if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, 1000))
             {
-                // var fireObj = Instantiate(_fireObject, _firePoint.position, Quaternion.identity);
-                // Destroy(fireObj, 0.2f);
-                //
-                _fireObject.Play();
-                
                 var hitObj = Instantiate(_hitObject, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(hitObj, 1);
                 
-                Debug.Log(hit.collider.gameObject.name);
+                Debug.DrawRay(_camera.transform.position, _camera.transform.forward * 1000, Color.red, 10);
             }
         }
     }
